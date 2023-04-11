@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Card from "./Card";
+import { API_URL } from "@/config";
 import type ICharacter from "@/types/character";
 
 type ListProps = {
@@ -9,7 +10,7 @@ type ListProps = {
 function List({ onClick }: ListProps) {
 
   const handleFetch = async () => {
-    const response = await fetch("http://localhost:3000/api/characters");
+    const response = await fetch(`${API_URL}/api/characters`);
     const data = await response.json();
 
     return data;
