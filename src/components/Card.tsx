@@ -3,10 +3,17 @@ import { useState } from "react";
 
 type CardProps = {
   character: ICard;
+  onClick: (card: ICard) => void;
 };
 
-function Card({ character }: CardProps) {
-  const [selected, setSelected] = useState<boolean>(character.selected || false);
+function Card({ character, onClick }: CardProps) {
+  const [selected, setSelected] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setSelected(!selected);
+
+    onClick({ ...character, selected: !selected });
+  };
 
   return (
     <article className="flex flex-row justify-between items-center bg-slate-200 p-4 odd:bg-slate-100 transition-all">
@@ -18,7 +25,7 @@ function Card({ character }: CardProps) {
         </div>
       </div>
       <div className="transition-all">
-        <button className={`p-2 ${selected ? 'bg-blue-400 text-white' : 'bg-white border'} rounded-lg`} onClick={() => setSelected(!selected)}>
+        <button className={`p-2 ${selected ? 'bg-blue-400 text-white' : 'bg-white border'} rounded-lg`} onClick={handleClick}>
           {selected ? 'Seleccionado' : 'Seleccionar'}
         </button>
       </div>
