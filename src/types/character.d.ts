@@ -12,6 +12,7 @@ export default interface ICharacter {
   work?: string[];
   otherWork?: string[];
   status: STATUS;
+  selected?: boolean;
   gender: GENDER;
   height?: number;
   nicknames?: string[];

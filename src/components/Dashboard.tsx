@@ -1,23 +1,8 @@
 import { useEffect, useState } from "react";
 import List from "./List"
 import Options from "./Options"
-import type ICard from "@/types/card";
+import ICharacter from "@/types/character";
 import type IOption from "@/types/option";
-
-const characters: ICard[] = [
-  {
-    id: 1,
-    name: "Luis Gonzales Camacho",
-    description: "Añadido por Alejandro",
-    selected: false,
-  },
-  {
-    id: 2,
-    name: "Diego Montalbán Beltrán",
-    description: "Añadido por Alejandro",
-    selected: false,
-  }
-]
 
 const options: IOption[] = [
   { heading: "Agregar personaje", enabled: true },
@@ -27,17 +12,17 @@ const options: IOption[] = [
 ];
 
 function Dashboard() {
-  const [selected, setSelected] = useState<ICard[]>([]);
+  const [selected, setSelected] = useState<ICharacter[]>([]);
 
   useEffect(() => {
     console.log(selected);
   }, [selected])
 
-  const handleSelect = (card: ICard) => {
-    if (selected.some((item) => item.id === card.id)) {
-      setSelected(selected.filter((item) => item.id !== card.id));
+  const handleSelect = (character: ICharacter) => {
+    if (selected.some((item) => item._id === character._id)) {
+      setSelected(selected.filter((item) => item._id !== character._id));
     } else {
-      setSelected([...selected, card]);
+      setSelected([...selected, character]);
     }
   };
 
@@ -54,7 +39,7 @@ function Dashboard() {
         <h1 className="text-1xl font-medium">Bienvenido, Invitado</h1>
         <button>Iniciar Sessión</button>
       </div>
-      <List data={characters} onClick={handleSelect} />
+      <List onClick={handleSelect} />
       <Options options={dynamicOptions} />
     </section>
   )
