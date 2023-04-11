@@ -10,7 +10,7 @@ type ListProps = {
 function List({ onClick }: ListProps) {
 
   const handleFetch = async () => {
-    const response = await fetch(`${API_URL}/api/characters`);
+    const response = await fetch(API_URL as string);
     const data = await response.json();
 
     return data;
