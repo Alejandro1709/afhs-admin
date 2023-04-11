@@ -17,7 +17,7 @@ function Layout({ title = 'AFHS Admin', description = 'AFHS API Admin Panel', ch
       </Head>
       <Wrapper>
         <Navigation />
-        <main className="flex-1">
+        <main className="flex-1 mx-6 md:mx-16">
           {children}
         </main>
       </Wrapper>
