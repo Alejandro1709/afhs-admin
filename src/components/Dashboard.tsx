@@ -1,7 +1,11 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import List from "./List"
 import Options from "./Options"
 import ICharacter from "@/types/character";
+import useAuth from "@/hooks/useAuth";
+import Link from "next/link";
 import type IOption from "@/types/option";
 
 const options: IOption[] = [
@@ -33,11 +37,13 @@ function Dashboard() {
     return option;
   });
 
+  const { user } = useAuth()
+
   return (
     <section className='flex flex-col gap-4 mt-6 md:max-w-screen-lg md:mx-auto'>
       <div className="flex items-center justify-between bg-white border rounded-md select-none p-4 shadow-md">
-        <h1 className="text-1xl font-medium">Bienvenido, Invitado</h1>
-        <button>Iniciar Sessión</button>
+        <h1 className="text-1xl font-medium">Bienvenido, {user?.name}</h1>
+        {user ? <button>Cerrar Sessión</button> : <Link href='/auth/login'>Iniciar Sessión</Link>}
       </div>
       <List onClick={handleSelect} />
       <Options options={dynamicOptions} />
