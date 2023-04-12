@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import { API_URL } from "@/config";
 import type ICharacter from "@/types/character";
+import axios from "axios";
 
 type ListProps = {
   onClick: (character: ICharacter) => void;
@@ -10,9 +11,7 @@ type ListProps = {
 function List({ onClick }: ListProps) {
 
   const handleFetch = async () => {
-    const response = await fetch(API_URL as string);
-    const data = await response.json();
-
+    const { data } = await axios.get(API_URL as string);
     return data;
   }
 
