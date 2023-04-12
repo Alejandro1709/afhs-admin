@@ -15,7 +15,7 @@ function List({ onClick }: ListProps) {
   const [data, setData] = useState<ICharacter[]>([])
 
   const handleFetch = async () => {
-    const { data } = await axios.get("http://localhost:3000/api/characters");
+    const { data } = await axios.get("https://admin.afhsapi.com/api/characters");
     return data;
   }
 
