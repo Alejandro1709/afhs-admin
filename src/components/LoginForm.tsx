@@ -17,7 +17,7 @@ function LoginForm() {
       }
     }
 
-    const { data } = await axios.post("http://localhost:3000/api/auth/login", { email, password }, config)
+    const { data } = await axios.post("https://admin.afhsapi.com/api/auth/login", { email, password }, config)
 
     return data
   }
