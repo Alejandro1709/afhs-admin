@@ -1,11 +1,11 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 import Layout from '@/components/Layout'
 import useAuth from '@/hooks/useAuth'
 import Link from 'next/link'
 import axios, { type AxiosError } from 'axios'
 import type ICharacter from '@/types/character'
-import { useRouter } from 'next/router'
 
 function NewCharacterPage() {
 
@@ -31,14 +31,13 @@ function NewCharacterPage() {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user?.token}`
+        'Content-Type': 'application/json'
       }
     }
 
     if (!user) return
 
-    const { data } = await axios.post('/api/characters', formData, config)
+    const { data } = await axios.post('/api/characters', { ...formData, token: user.token }, config)
 
     return data
   }
