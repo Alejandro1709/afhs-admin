@@ -116,15 +116,15 @@ function NewCharacterPage() {
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="height">Altura (m):</label>
-            <input className='p-2 border' type="text" name="height" id="height" placeholder='167' required value={formData.height} onChange={handleChange} />
+            <input className='p-2 border' type="text" name="height" id="height" placeholder='167' value={formData.height} onChange={handleChange} />
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="nicknames">Apodos:</label>
-            <input className='p-2 border' type="text" name="nicknames" id="nicknames" placeholder='Niño con cara de pez,La Leyenda' required value={formData.nicknames} onChange={handleChange} />
+            <input className='p-2 border' type="text" name="nicknames" id="nicknames" placeholder='Niño con cara de pez,La Leyenda' value={formData.nicknames} onChange={handleChange} />
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="catchphrases">Frases:</label>
-            <input className='p-2 border' type="text" name="catchphrases" id="catchphrases" placeholder='Cua cua cua cuan,Superame pues,Ah que lindo' required value={formData.catchphrases} onChange={handleChange} />
+            <input className='p-2 border' type="text" name="catchphrases" id="catchphrases" placeholder='Cua cua cua cuan,Superame pues,Ah que lindo' value={formData.catchphrases} onChange={handleChange} />
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="autor">Autor:</label>
