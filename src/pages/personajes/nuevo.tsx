@@ -1,11 +1,17 @@
 import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import Layout from '@/components/Layout'
 import useAuth from '@/hooks/useAuth'
 import Link from 'next/link'
+import axios, { type AxiosError } from 'axios'
+import type ICharacter from '@/types/character'
+import { useRouter } from 'next/router'
 
 function NewCharacterPage() {
 
   const { user } = useAuth()
+
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -21,6 +27,33 @@ function NewCharacterPage() {
     catchphrases: '',
   })
 
+  const handleCreate = async () => {
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user?.token}`
+      }
+    }
+
+    if (!user) return
+
+    const { data } = await axios.post('/api/characters', formData, config)
+
+    return data
+  }
+
+  const { mutate, isLoading, error } = useMutation({
+    mutationKey: ['create'],
+    mutationFn: handleCreate,
+    onSuccess: (data: ICharacter) => {
+      router.push('/')
+    },
+    onError: (error: AxiosError) => {
+      console.log(error)
+    }
+  })
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
@@ -31,7 +64,7 @@ function NewCharacterPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log(formData)
+    mutate()
   }
 
   return (
@@ -99,7 +132,7 @@ function NewCharacterPage() {
             <input className='p-2 border' type="text" name="autor" id="autor" value={`${user?.name || "Erick Elera"} (${user?.email || "erick@mail.com"})`} disabled />
           </div>
           <div className="flex flex-col gap-2 mt-2">
-            <button className='p-2 bg-blue-500 hover:bg-blue-600 text-white' type="submit">Guardar</button>
+            <button disabled={isLoading} className='p-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white' type="submit">Guardar</button>
             <Link href="/" className='p-2 bg-red-500 text-center hover:bg-red-600 text-white' type="button">Cancelar</Link>
           </div>
         </form>
