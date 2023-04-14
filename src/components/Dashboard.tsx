@@ -9,8 +9,8 @@ import Link from "next/link";
 import type IOption from "@/types/option";
 
 const options: IOption[] = [
-  { heading: "Agregar personaje", enabled: true },
-  { heading: "Editar personaje", enabled: false },
+  { heading: "Agregar personaje", enabled: true, isLink: true, link: "/personajes/nuevo" },
+  { heading: "Editar personaje", enabled: false, isLink: true, link: "/personajes/:slug/edit" },
   { heading: "Eliminar personaje", enabled: false },
   { heading: "Cuentas Creadas", enabled: true },
 ];
@@ -42,7 +42,7 @@ function Dashboard() {
   return (
     <section className='flex flex-col gap-4 mt-6 md:max-w-screen-lg md:mx-auto'>
       <div className="flex items-center justify-between bg-white border rounded-md select-none p-4 shadow-md">
-        <h1 className="text-1xl font-medium">Bienvenido, {user?.name}</h1>
+        <h1 className="text-1xl font-medium">Bienvenido, {user?.name || 'Invitado'}</h1>
         {user ? <button>Cerrar Sessión</button> : <Link href='/auth/login'>Iniciar Sessión</Link>}
       </div>
       <List onClick={handleSelect} />
