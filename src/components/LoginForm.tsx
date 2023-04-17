@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/router";
-import axios, { type AxiosError } from "axios";
+import { handleLogin } from "@/services/characters";
+import { type AxiosError } from "axios";
 import { type AuthResponse } from "@/types/response";
 
 function LoginForm() {
@@ -10,21 +11,15 @@ function LoginForm() {
 
   const router = useRouter()
 
-  const handleLogin = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    const { data } = await axios.post("https://admin.afhsapi.com/api/auth/login", { email, password }, config)
+  const handleLoginn = async () => {
+    const { data } = await handleLogin(email, password)
 
     return data
   }
 
   const { mutate, isLoading, error } = useMutation({
     mutationKey: ["login"],
-    mutationFn: handleLogin,
+    mutationFn: handleLoginn,
     onSuccess: (data: AuthResponse) => {
       sessionStorage.setItem('user', JSON.stringify(data))
       router.push('/')

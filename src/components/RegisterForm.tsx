@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";
+import { handleRegister } from "@/services/characters";
 import { type AuthResponse } from "@/types/response";
-import axios, { type AxiosError } from "axios";
+import { type AxiosError } from "axios";
 
 function RegisterForm() {
   const [name, setName] = useState<string>("");
@@ -12,19 +13,13 @@ function RegisterForm() {
   const router = useRouter()
 
   const handleLogin = async () => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    const { data } = await axios.post("https://admin.afhsapi.com/api/auth/register", { name, email, password }, config)
+    const { data } = await handleRegister(name, email, password)
 
     return data
   }
 
   const { mutate, isLoading, error } = useMutation({
-    mutationKey: ["login"],
+    mutationKey: ["register"],
     mutationFn: handleLogin,
     onSuccess: (data: AuthResponse) => {
       sessionStorage.setItem('user', JSON.stringify(data))
