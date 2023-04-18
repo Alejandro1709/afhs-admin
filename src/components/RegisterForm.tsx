@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";
-import { handleRegister } from "@/services/characters";
+import { handleRegister } from "@/services/auth";
 import { type AuthResponse } from "@/types/response";
 import { type AxiosError } from "axios";
 
