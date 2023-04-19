@@ -8,13 +8,13 @@ export default interface ICharacter {
   slug?: string;
   actor: string | string[];
   image?: string;
-  birthdate?: string[];
-  work?: string[];
-  otherWork?: string[];
-  status: STATUS;
+  birthdate?: string[] | string;
+  work?: string[] | string;
+  otherWork?: string[] | string;
+  status: STATUS | string;
   selected?: boolean;
-  gender: GENDER;
-  height?: number;
-  nicknames?: string[];
-  catchphrases?: string[];
+  gender: GENDER | string;
+  height?: number | string;
+  nicknames?: string[] | string;
+  catchphrases?: string[] | string;
 }
